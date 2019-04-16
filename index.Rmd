@@ -1,5 +1,5 @@
 ---
-title: "Building a Shiny Application From Scratch"
+title: "Building a Shiny Application from Scratch"
 author: "Hadrien@rstudio.com"
 site: bookdown::bookdown_site
 documentclass: book
@@ -12,12 +12,83 @@ output:
 
 Shiny is a powerful R package which allows you to create interactive web applications using the R programming language. It is particularly useful for creating applications that run on data and include some sort of data analysis or visualization. In addition to leveraging the power of R and its thousands of packages, one of the big benefits of shiny is the ease of developing applications using R only. Although it is possible to incorporate more traditional web design languages such as custom CSS or Javascript into your shiny application, it is not required.
 
+This online document was created to accompany workshops and webinars on how to build a Shiny application. This guide was created using the [`bookdown`](https://bookdown.org/yihui/bookdown/) package and is still a work in progress. If you find any errors or typos you would like to correct, please feel free to submit a pull request on [github](https://github.com/hdykiel/shiny-guide).
+
 # Getting Started
 
-To get started, make sure you have the shiny package installed on your system. You can download shiny from CRAN using the command `install.packages("shiny")`. The RStudio IDE contains a basic shiny application template you can use to create your first shiny application. To access this template, click on the new document icon in the top left corner of the IDE and select "Shiny Web App...". This will create the R script file `app.R` which contains the basic components of a shiny application. You can use this simple shiny application as a starting point for building your own applications.
+To get started, make sure you have the shiny package installed on your system. You can download shiny from CRAN using the command `install.packages("shiny")`. The RStudio IDE contains a basic shiny application template you can use to create your first shiny application. To access this template, click on the new document icon in the top left corner of the IDE and select "Shiny Web App...". This will create the R script file `app.R` which contains the basic components of a shiny application. You can use this simple shiny application as a starting point for building your own applications. It will look something like this: 
 
-# The Anatomy of a Shiny Application 
+```{r, eval = FALSE}
+
+#
+# This is a Shiny web application. You can run the application by clicking
+# the 'Run App' button in the RStudio IDE or running the command runApp("app.R").
+#
 
 
+library(shiny)
 
-# Use Cases 
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+
+    # Application title
+    titlePanel("Old Faithful Geyser Data"),
+
+    # Sidebar with a slider input for number of bins
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("bins",
+                        "Number of bins:",
+                        min = 1,
+                        max = 50,
+                        value = 30)
+        ),
+
+        # Show a plot of the generated distribution
+        mainPanel(
+           plotOutput("distPlot")
+        )
+    )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+```
+
+
+Don't worry about how the application works exactly. We will go through each code chunk and explain what each one of them does in the next section. For now, try running the application on your computer by clicking the the "Run App" button in the RStudio IDE. This will start the application and open up your default web browser so you view it.
+
+# Components of a Shiny Application
+
+In this section, we'll take a closer look at the shiny application code you just ran. Shiny applications are made up of 2 important components: the user interface (UI) and the server section.
+
+## UI Section 
+
+The UI section of your shiny application is where you define what your application will look like. In a nutshell, this is where you write your shiny functions and R code, which shiny will then take care of translating into html and CSS code that today's modern web browsers can read and render into a beautiful web application. For example, the function `shiny::fluidPage` is often used in the UI section to define the outer most layer of the UI. It creates a web page containing both rows and columns which is fluid, meaning it scales to fill all available browser width. `fluidpage()` is R code, but once you initiate the rendering process from the console with the `runApp()` function or by clicking the "Run App" button in the RStudio IDE, it will get converted into HTML and CSS code that defines the layout of your application.
+
+
+An important part of creating the UI for you application is deciding what [input controls](https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/) the users will have to interact with the application. Whatever value the application viewer chooses will be saved to a variable called `input` which you will use in the server section of your application. 
+
+Our example application used the default `sidebarLayout` function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the `sidebarLayout` with other functions like `fluidRow` and `tabsetPanel`, for example.
+
+
+Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the `ui` object. At the bottom of your script, you will need to pass both the ui and server sections to the function `shiny::shinyApp()`.
+
+## Server Section
+
+The server section of your shiny application is where the computation takes place. Any code you write for transforming data or creating visualizations will most likely be in this section.
+

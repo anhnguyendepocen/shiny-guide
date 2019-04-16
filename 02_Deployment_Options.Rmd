@@ -1,0 +1,14 @@
+# Deploying Your Shiny Application 
+
+Now that you have created an application, the next step is choosing how this application will be shared with others. So far, we've only run the application on our local computers (or wherever your development environment is). In this section, we'll take a look at the different locations you can deploy your application so it remains available 24/7 to anyone in the world who has been granted access to it.
+
+**Deployment Options** 
+
+- [RStudio Connect](https://www.rstudio.com/products/connect/) is a publishing platform that can host many different types of data products created in R, including shiny applications. It offers features such such as push-button deployment and an API for more flexible deployment workflow. It is a paid software product which runs on a Linux server and is considered the de facto choice for enterprise environments.
+
+- [Shiny Server Open Source](https://www.rstudio.com/products/shiny/download-server/) is a free alternative which also runs on Linux. Unlike RStudio Connect, it requires manual deployment of shiny applications, does not offer support for authentication integration with popular auth providers, cannot host other types of R data artifacts such as Plumber APIs and R Markdown documents, and is limited to a single R process.
+
+- [shinyapps.io](https://www.shinyapps.io/) is a shared hosting environment managed by RStudio. Both free and paid tiers are available. This hosting platform is most commonly used in non-enterprise environments.
+
+
+All of these hosting environments essentially act as typical web servers, except for the fact that they can also run a R Shiny process, which is required for running your Shiny application.
