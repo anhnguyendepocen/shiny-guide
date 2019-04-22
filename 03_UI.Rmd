@@ -1,0 +1,12 @@
+# User Interface 
+
+How your application will look will be determined by the `ui` object you define. This is where you will choose the layout of your application, the input controls available to the user, and the content that will be made visible. Let's start with choosing a layout:
+
+## Layout Options 
+
+At the time of this writing, you should always start with the `fluidPage` function as the outermost layer of your ui. This is the function you will use to pass important elements of your UI, such which layout type you'd like to use. One of the most commmon application layouts is the **Sidebar Layout**, which has a skinny sidebar on the left hand-side (by default) where input controls are usually added and a main panel on the right-hand side which typically displays the results. To create this type of layout, simply pass the shiny ui function `sidebarLayout` to `fluidPage`. The `sidebarLayout` functions contains 2 required arguments, `sidebarPanel` and `mainPanel`, which are functions you can use to define the input controls for the sidebar and the output content you went to display in the main panel, respectively.
+
+## Input Controls 
+
+An important part of creating the UI for you application is deciding what [input controls](https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/) the users will have to interact with the application. Whatever value the application viewer chooses will be saved to a variable called `input` which you will use in the server section of your application. 
+
