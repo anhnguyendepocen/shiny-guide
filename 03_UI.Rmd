@@ -4,7 +4,78 @@ How your application will look will be determined by the `ui` object you define.
 
 ## Layout Options 
 
-At the time of this writing, you should always start with the `fluidPage` function as the outermost layer of your ui. This is the function you will use to pass important elements of your UI, such which layout type you'd like to use. One of the most commmon application layouts is the **Sidebar Layout**, which has a skinny sidebar on the left hand-side (by default) where input controls are usually added and a main panel on the right-hand side which typically displays the results. To create this type of layout, simply pass the shiny ui function `sidebarLayout` to `fluidPage`. The `sidebarLayout` functions contains 2 required arguments, `sidebarPanel` and `mainPanel`, which are functions you can use to define the input controls for the sidebar and the output content you went to display in the main panel, respectively.
+At the time of this writing, you should always start with the `fluidPage` function as the outermost layer of your ui. This is the function you will use to pass important elements of your UI, such which layout type you'd like to use.
+
+**Sidebar Layout** 
+
+One of the most commmon application layouts is theSidebar Layout, which has a skinny sidebar on the left hand-side (by default) where input controls are usually added and a main panel on the right-hand side which typically displays the results. To create this type of layout, simply pass the shiny ui function `sidebarLayout` to `fluidPage`. The `sidebarLayout` functions contains 2 required arguments, `sidebarPanel` and `mainPanel`, which are functions you can use to define the input controls for the sidebar and the output content you went to display in the main panel, respectively:
+
+```{r, eval=FALSE}
+# Minimum viable example of a shiny app with a sidebar layout
+
+library(shiny)
+
+# Define UI
+ui <- fluidPage(
+    # Sidebar Layout
+    sidebarLayout(
+        # Sidebar Layout Elements
+        sidebarPanel = sidebarPanel("Replace this placeholder text with your input controls of choice."),
+        mainPanel = mainPanel(
+            "Replace this placeholder text with outputs, defined in the server function below,
+                                        you want displayed in the main panel."
+        )
+        
+    ))
+
+
+# Server function
+server <- function(input, output) {
+    
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+
+```
+
+This code generates the very boring looking application below. As you can see, it is made up of a small sidebar on the left and a main panel on the right:
+
+![](screenshots/sidebar_layout_mve.png)
+
+**Grid Layout** 
+
+This type of layout gives you a bit more control of how to arrange your page. First, use the function `fluidRow` to add  rows to your application and then the function `column` to create columns within those rows. These function allow you to create any grid layout you like, including even grids within grids. To create a page with 2 rows, 1 colum for the top half, and 2 columns for the bottom half, I would write the following code:
+
+```{r, eval = FALSE}
+# Minimum viable example of a shiny app with a grid layout
+
+library(shiny)
+
+# Define UI
+ui <- fluidPage(
+  # Grid Layout
+    fluidRow(wellPanel("Top row")),
+    fluidRow(column(width = 4, wellPanel("Bottom row, column 1, width 4")),
+             column(width = 8, wellPanel("Bottom row, column 2, width 8"))))
+
+
+# Server function
+server <- function(input, output) {
+    
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+```
+
+Running the code generates the following shiny application:
+
+![](screenshots/grid-layout-mve.png)
+
+The first argument of the `column` function is width, which is  based on the Bootstrap 12-wide grid system, so the total width for each row should add up to 12. We also used the function `wellPanel` to give our grid elements a grey background and a slightly inset border. This also gave us the ability to add text. Shiny has numerous "[Panel](https://bookdown.org/weicheng/shinyTutorial/ui.html#layout){target=\"_blank\"}" functions, which you can think as the elements you put inside the layout containers you created using the "Layout" functions like `sidebarLayout`, `fluidrow`, `column`, etc. 
 
 ## Input Controls 
 
