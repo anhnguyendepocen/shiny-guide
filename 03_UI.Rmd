@@ -79,5 +79,52 @@ The first argument of the `column` function is width, which is  based on the Boo
 
 ## Input Controls 
 
-An important part of creating the UI for you application is deciding what [input controls](https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/) the users will have to interact with the application. Whatever value the application viewer chooses will be saved to a variable called `input` which you will use in the server section of your application. 
+An important part of creating the UI for you application is deciding what [input controls](https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/), also referred to as *control widgets*, the users will have to interact with the application. Whatever value the application user chooses will be saved to a variable called `input` which you will use in the server section of your application.
+
+There are 13 standard control widgets from simple check boxes to sliders. To add a control widget to you shiny application, add the control widget function of your choice inside one of the \*Panel functions. All widget control functions take at least 2 arguments: the **inputID** argument, which you will need to access the user input value in your code, and the **label** argument, where you can enter the description of the control widget visible to the user.
+
+With applications using a sidebar layout style, it is common to add widget controls in the `sidePanel` function, since it is better to reserver the bigger `mainPanel` for displaying plots. Below is an example of how you would add a searchable dropdown box to your shiny application using the widget control function `selectInput`:
+
+```{r, eval = FALSE}
+# Example of a shiny application with a sidebar layout and a selectInput control widget
+library(shiny)
+
+# Define UI
+ui <- fluidPage(
+  # Sidebar Layout
+  sidebarLayout(
+    # Sidebar Layout Elements (i.e. the panels)
+    sidebarPanel = sidebarPanel(
+      #Control Widget
+      selectInput(
+        inputId = "input_1",
+        label = "Short description of control widget",
+        choices = c(
+          "Iowa" = "IA",
+          "Colorado" = "CO",
+          "Massachusetts" = "MA"
+        )
+      )
+    ),
+    mainPanel = mainPanel(
+      "Replace this placeholder text with outputs,
+      defined in the server function below,
+      you want displayed in the main panel."
+    )
+    
+  ))
+
+# Server function
+server <- function(input, output) {
+  
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+```
+
+![](screenshots/widget-control.png)
+
+Make a mental note of the `inputID` you choose for each of your control widgets, because this is how you will access the user input values in the server section of your application.
 
