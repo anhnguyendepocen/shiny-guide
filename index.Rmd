@@ -1,10 +1,12 @@
 ---
-title: "Building a Shiny Application from Scratch"
+title: "Build a Shiny Application from Scratch"
 author: "Hadrien@rstudio.com"
 site: bookdown::bookdown_site
 documentclass: book
 output:
-  bookdown::gitbook: default
+  bookdown::gitbook:
+    includes:
+      in_header: GA_script.html
   #bookdown::pdf_book: default
 ---
 
