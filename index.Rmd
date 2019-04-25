@@ -85,7 +85,7 @@ The UI section of your shiny application is where you define what your applicati
 Our example application used the default `sidebarLayout` function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the `sidebarLayout` with other functions like `fluidRow` and `tabsetPanel`, for example.
 
 
-Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the `ui` object. At the bottom of your script, you will need to pass both the ui and server sections to the function `shiny::shinyApp()`.
+Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the `ui` object. At the bottom of your script, you will need to pass both the ui and server objects you created to the function `shiny::shinyApp()`.
 
 **Server Section** 
 
