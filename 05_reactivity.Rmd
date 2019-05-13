@@ -1,0 +1,31 @@
+# Shiny Reactivity Model 
+
+Most often, R developers will choose to create a Shiny application because they want their users to be able to interact with their data. In other words, the purpose of a Shiny application is that it *reacts* to the users' interactions with it. To that end, it is helpful to understand the basics of how Shiny's reactivity model works.
+
+**What is reactive programming?** 
+
+Most commonly, R code is executed in a linear fashion from top to bottom. Line by line, the program is executed in the order that it was written. With reactive programming, the program also relies on *events* to determine how and when the code should be executed. Events are monitored and when they occur, the code *reacts* to those events.
+
+**Why use render and output functions**
+
+Shiny does not intuitively know which pieces of your code should be re-executed and at what times. When writing a Shiny app, you need to tell Shiny which chunks of your code should be reactive to events such as users changing the input values in the control widgets. Because you want your plots, tables, and other outputs to be updated everytime a user changes the input, any expressions in your server section that depend on the `input` variable should be made reactive. To make a code chunk reactive, you can use one of Shiny's many render functions which are reactive.  For example, anything enclosed in the function `renderPlot` will be re-executed every time certain event, such a changing `input` value, occurs:
+
+```{r, eval = FALSE}
+# Example of a Shiny server function
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+}
+
+```
+
+The above code, through the use of the reactive function `renderPlot`, will re-render the plot everytime a user interacts with the application. This new plot will be saved to the `output` variable, which will then be displayed in the UI.

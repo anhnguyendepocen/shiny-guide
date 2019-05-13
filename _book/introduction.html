@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Build a Shiny Application from Scratch</title>
-  <meta name="description" content="Build a Shiny Application from Scratch">
+  <title>Building a Shiny Application from Scratch</title>
+  <meta name="description" content="Building a Shiny Application from Scratch">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Build a Shiny Application from Scratch" />
+  <meta property="og:title" content="Building a Shiny Application from Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Build a Shiny Application from Scratch" />
+  <meta name="twitter:title" content="Building a Shiny Application from Scratch" />
   
   
   
@@ -47,15 +47,6 @@
 
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139108040-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-139108040-1');
-</script>
 
 
 <style type="text/css">
@@ -134,20 +125,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting Started</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#components-of-a-shiny-application"><i class="fa fa-check"></i><b>1.2</b> Components of a Shiny Application</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting Started</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#components-of-a-shiny-application"><i class="fa fa-check"></i><b>1.2</b> Components of a Shiny Application</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="user-interface.html"><a href="user-interface.html"><i class="fa fa-check"></i><b>2</b> User Interface</a><ul>
 <li class="chapter" data-level="2.1" data-path="user-interface.html"><a href="user-interface.html#layout-options"><i class="fa fa-check"></i><b>2.1</b> Layout Options</a></li>
 <li class="chapter" data-level="2.2" data-path="user-interface.html"><a href="user-interface.html#input-controls"><i class="fa fa-check"></i><b>2.2</b> Input Controls</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="server-function.html"><a href="server-function.html"><i class="fa fa-check"></i><b>3</b> Server Function</a></li>
-<li class="chapter" data-level="4" data-path="shiny-reactivity-model.html"><a href="shiny-reactivity-model.html"><i class="fa fa-check"></i><b>4</b> Shiny Reactivity Model</a></li>
-<li class="chapter" data-level="5" data-path="deploying-your-shiny-application.html"><a href="deploying-your-shiny-application.html"><i class="fa fa-check"></i><b>5</b> Deploying Your Shiny Application</a></li>
-<li class="chapter" data-level="6" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html"><i class="fa fa-check"></i><b>6</b> Optimizing Your Application</a><ul>
-<li class="chapter" data-level="6.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#rstudio-connect-infrastructure"><i class="fa fa-check"></i><b>6.1</b> RStudio Connect Infrastructure</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#runtime-settings"><i class="fa fa-check"></i><b>6.1.1</b> Runtime Settings</a></li>
+<li class="chapter" data-level="3" data-path="deploying-your-shiny-application.html"><a href="deploying-your-shiny-application.html"><i class="fa fa-check"></i><b>3</b> Deploying Your Shiny Application</a></li>
+<li class="chapter" data-level="4" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html"><i class="fa fa-check"></i><b>4</b> Optimizing Your Application</a><ul>
+<li class="chapter" data-level="4.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#rstudio-connect-infrastructure"><i class="fa fa-check"></i><b>4.1</b> RStudio Connect Infrastructure</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#runtime-settings"><i class="fa fa-check"></i><b>4.1.1</b> Runtime Settings</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -159,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Build a Shiny Application from Scratch</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Building a Shiny Application from Scratch</a>
           </h1>
         </div>
 
@@ -168,7 +157,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Build a Shiny Application from Scratch</h1>
+<h1 class="title">Building a Shiny Application from Scratch</h1>
 <p class="author"><em><a href="mailto:Hadrien@rstudio.com" class="email">Hadrien@rstudio.com</a></em></p>
 </div>
 <div id="introduction" class="section level1">
@@ -232,7 +221,7 @@ server &lt;-<span class="st"> </span><span class="cf">function</span>(input, out
 <p><strong>UI Section</strong></p>
 <p>The UI section of your shiny application is where you define what your application will look like. In a nutshell, this is where you write your shiny functions and R code, which shiny will then take care of translating into html and CSS code that today’s modern web browsers can read and render into a beautiful web application. For example, the function <code>shiny::fluidPage</code> is often used in the UI section to define the outer most layer of the UI. It creates a web page containing both rows and columns which is fluid, meaning it scales to fill all available browser width. <code>fluidpage()</code> is R code, but once you initiate the rendering process from the console with the <code>runApp()</code> function or by clicking the “Run App” button in the RStudio IDE, it will get converted into HTML and CSS code that defines the layout of your application.</p>
 <p>Our example application used the default <code>sidebarLayout</code> function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the <code>sidebarLayout</code> with other functions like <code>fluidRow</code> and <code>tabsetPanel</code>, for example.</p>
-<p>Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the <code>ui</code> object. At the bottom of your script, you will need to pass both the ui and server objects you created to the function <code>shiny::shinyApp()</code>.</p>
+<p>Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the <code>ui</code> object. At the bottom of your script, you will need to pass both the ui and server sections to the function <code>shiny::shinyApp()</code>.</p>
 <p><strong>Server Section</strong></p>
 <p>The server section of your shiny application is where the computation takes place. Any code you write for transforming data or creating visualizations will most likely be in this section.</p>
 

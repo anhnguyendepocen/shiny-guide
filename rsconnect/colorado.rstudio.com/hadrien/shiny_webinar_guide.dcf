@@ -1,0 +1,12 @@
+name: shiny_webinar_guide
+title: Shiny webinar guide
+username: hadrien
+account: hadrien
+server: colorado.rstudio.com
+hostUrl: https://colorado.rstudio.com/rsc/__api__
+appId: 2340
+bundleId: 25582
+url: https://colorado.rstudio.com:443/rsc/shiny-webinar-guide/
+when: 1555432137.82034
+asMultiple: FALSE
+asStatic: TRUE

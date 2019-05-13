@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>2 User Interface | Build a Shiny Application from Scratch</title>
+  <meta name="description" content="2 User Interface | Build a Shiny Application from Scratch">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="2 User Interface | Build a Shiny Application from Scratch" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 User Interface | Build a Shiny Application from Scratch" />
+  
+  
+  
+
+<meta name="author" content="Hadrien@rstudio.com">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="server-function.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139108040-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-139108040-1');
+</script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.1</b> Getting Started</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#components-of-a-shiny-application"><i class="fa fa-check"></i><b>1.2</b> Components of a Shiny Application</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="user-interface.html"><a href="user-interface.html"><i class="fa fa-check"></i><b>2</b> User Interface</a><ul>
+<li class="chapter" data-level="2.1" data-path="user-interface.html"><a href="user-interface.html#layout-options"><i class="fa fa-check"></i><b>2.1</b> Layout Options</a></li>
+<li class="chapter" data-level="2.2" data-path="user-interface.html"><a href="user-interface.html#input-controls"><i class="fa fa-check"></i><b>2.2</b> Input Controls</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="server-function.html"><a href="server-function.html"><i class="fa fa-check"></i><b>3</b> Server Function</a></li>
+<li class="chapter" data-level="4" data-path="shiny-reactivity-model.html"><a href="shiny-reactivity-model.html"><i class="fa fa-check"></i><b>4</b> Shiny Reactivity Model</a></li>
+<li class="chapter" data-level="5" data-path="deploying-your-shiny-application.html"><a href="deploying-your-shiny-application.html"><i class="fa fa-check"></i><b>5</b> Deploying Your Shiny Application</a></li>
+<li class="chapter" data-level="6" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html"><i class="fa fa-check"></i><b>6</b> Optimizing Your Application</a><ul>
+<li class="chapter" data-level="6.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#rstudio-connect-infrastructure"><i class="fa fa-check"></i><b>6.1</b> RStudio Connect Infrastructure</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#runtime-settings"><i class="fa fa-check"></i><b>6.1.1</b> Runtime Settings</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Build a Shiny Application from Scratch</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="user-interface" class="section level1">
+<h1><span class="header-section-number">2</span> User Interface</h1>
+<p>How your application will look will be determined by the <code>ui</code> object you define. This is where you will choose the layout of your application, the input controls available to the user, and the content that will be made visible. Let’s start with choosing a layout:</p>
+<div id="layout-options" class="section level2">
+<h2><span class="header-section-number">2.1</span> Layout Options</h2>
+<p>At the time of this writing, you should always start with the <code>fluidPage</code> function as the outermost layer of your ui. This is the function you will use to pass important elements of your UI, such which layout type you’d like to use.</p>
+<p><strong>Sidebar Layout</strong></p>
+<p>One of the most commmon application layouts is theSidebar Layout, which has a skinny sidebar on the left hand-side (by default) where input controls are usually added and a main panel on the right-hand side which typically displays the results. To create this type of layout, simply pass the shiny ui function <code>sidebarLayout</code> to <code>fluidPage</code>. The <code>sidebarLayout</code> functions contains 2 required arguments, <code>sidebarPanel</code> and <code>mainPanel</code>, which are functions you can use to define the input controls for the sidebar and the output content you went to display in the main panel, respectively:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Minimum viable example of a shiny app with a sidebar layout</span>
+
+<span class="kw">library</span>(shiny)
+
+<span class="co"># Define UI</span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+    <span class="co"># Sidebar Layout</span>
+    <span class="kw">sidebarLayout</span>(
+        <span class="co"># Sidebar Layout Elements</span>
+        <span class="dt">sidebarPanel =</span> <span class="kw">sidebarPanel</span>(<span class="st">&quot;Replace this placeholder text with your input controls of choice.&quot;</span>),
+        <span class="dt">mainPanel =</span> <span class="kw">mainPanel</span>(
+            <span class="st">&quot;Replace this placeholder text with outputs, defined in the server function below,</span>
+<span class="st">                                        you want displayed in the main panel.&quot;</span>
+        )
+        
+    ))
+
+
+<span class="co"># Server function</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+    
+}
+
+<span class="co"># Run the application</span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre>
+<p>This code generates the very boring looking application below. As you can see, it is made up of a small sidebar on the left and a main panel on the right:</p>
+<p><img src="screenshots/sidebar_layout_mve.png" /></p>
+<p><strong>Grid Layout</strong></p>
+<p>This type of layout gives you a bit more control of how to arrange your page. First, use the function <code>fluidRow</code> to add rows to your application and then the function <code>column</code> to create columns within those rows. These function allow you to create any grid layout you like, including even grids within grids. To create a page with 2 rows, 1 colum for the top half, and 2 columns for the bottom half, I would write the following code:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Minimum viable example of a shiny app with a grid layout</span>
+
+<span class="kw">library</span>(shiny)
+
+<span class="co"># Define UI</span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  <span class="co"># Grid Layout</span>
+    <span class="kw">fluidRow</span>(<span class="kw">wellPanel</span>(<span class="st">&quot;Top row&quot;</span>)),
+    <span class="kw">fluidRow</span>(<span class="kw">column</span>(<span class="dt">width =</span> <span class="dv">4</span>, <span class="kw">wellPanel</span>(<span class="st">&quot;Bottom row, column 1, width 4&quot;</span>)),
+             <span class="kw">column</span>(<span class="dt">width =</span> <span class="dv">8</span>, <span class="kw">wellPanel</span>(<span class="st">&quot;Bottom row, column 2, width 8&quot;</span>))))
+
+
+<span class="co"># Server function</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+    
+}
+
+<span class="co"># Run the application</span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre>
+<p>Running the code generates the following shiny application:</p>
+<p><img src="screenshots/grid-layout-mve.png" /></p>
+<p>The first argument of the <code>column</code> function is width, which is based on the Bootstrap 12-wide grid system, so the total width for each row should add up to 12. We also used the function <code>wellPanel</code> to give our grid elements a grey background and a slightly inset border. This also gave us the ability to add text. Shiny has numerous “<a href="https://bookdown.org/weicheng/shinyTutorial/ui.html#layout" target="&quot;_blank&quot;">Panel</a>” functions, which you can think as the elements you put inside the layout containers you created using the “Layout” functions like <code>sidebarLayout</code>, <code>fluidrow</code>, <code>column</code>, etc.</p>
+</div>
+<div id="input-controls" class="section level2">
+<h2><span class="header-section-number">2.2</span> Input Controls</h2>
+<p>An important part of creating the UI for you application is deciding what <a href="https://shiny.rstudio.com/tutorial/written-tutorial/lesson3/">input controls</a>, also referred to as <em>control widgets</em>, the users will have to interact with the application. Whatever value the application user chooses will be saved to a variable called <code>input</code> which you will use in the server section of your application.</p>
+<p>There are 13 standard control widgets from simple check boxes to sliders. To add a control widget to you shiny application, add the control widget function of your choice inside one of the *Panel functions. All widget control functions take at least 2 arguments: the <strong>inputID</strong> argument, which you will need to access the user input value in your code, and the <strong>label</strong> argument, where you can enter the description of the control widget visible to the user.</p>
+<p>With applications using a sidebar layout style, it is common to add widget controls in the <code>sidePanel</code> function, since it is better to reserver the bigger <code>mainPanel</code> for displaying plots. Below is an example of how you would add a searchable dropdown box to your shiny application using the widget control function <code>selectInput</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example of a shiny application with a sidebar layout and a selectInput control widget</span>
+<span class="kw">library</span>(shiny)
+
+<span class="co"># Define UI</span>
+ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  <span class="co"># Sidebar Layout</span>
+  <span class="kw">sidebarLayout</span>(
+    <span class="co"># Sidebar Layout Elements (i.e. the panels)</span>
+    <span class="dt">sidebarPanel =</span> <span class="kw">sidebarPanel</span>(
+      <span class="co">#Control Widget</span>
+      <span class="kw">selectInput</span>(
+        <span class="dt">inputId =</span> <span class="st">&quot;input_1&quot;</span>,
+        <span class="dt">label =</span> <span class="st">&quot;Short description of control widget&quot;</span>,
+        <span class="dt">choices =</span> <span class="kw">c</span>(
+          <span class="st">&quot;Iowa&quot;</span> =<span class="st"> &quot;IA&quot;</span>,
+          <span class="st">&quot;Colorado&quot;</span> =<span class="st"> &quot;CO&quot;</span>,
+          <span class="st">&quot;Massachusetts&quot;</span> =<span class="st"> &quot;MA&quot;</span>
+        )
+      )
+    ),
+    <span class="dt">mainPanel =</span> <span class="kw">mainPanel</span>(
+      <span class="st">&quot;Replace this placeholder text with outputs,</span>
+<span class="st">      defined in the server function below,</span>
+<span class="st">      you want displayed in the main panel.&quot;</span>
+    )
+    
+  ))
+
+<span class="co"># Server function</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
+  
+}
+
+<span class="co"># Run the application</span>
+<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre>
+<p><img src="screenshots/widget-control.png" /></p>
+<p>Make a mental note of the <code>inputID</code> you choose for each of your control widgets, because this is how you will access the user input values in the server section of your application.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="server-function.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

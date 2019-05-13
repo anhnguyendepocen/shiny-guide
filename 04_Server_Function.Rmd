@@ -46,6 +46,6 @@ shinyApp(ui = ui, server = server)
 It is useful to remember the following 4 things when creating a new application output:
 
 1. In the server function, access user input values via the variable `input$inputID` 
-2. In the server function, build your output (e.g. plot, table, text, etc.) using one of the `render` functions (i.e. `renderPlot`, `renderDataTable`, `renderText`, etc.), choosing the function that matches your output type. 
+2. In the server function, build your output (e.g. plot, table, text, etc.) using one of the `render` functions (i.e. `renderPlot`, `renderDataTable`, `renderText`, etc.), choosing the function that matches your output type. Make sure to assign that output to the `output` object.
 3. In the UI section, access your output via the variable `output$output_name` 
 4. In the UI section, display your output using one of the corresponding \*Output functions based on your output's type (i.e. `plotOutput`, `tableOutput`, `textOutput`, etc.)

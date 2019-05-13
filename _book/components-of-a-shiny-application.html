@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>2 Getting Started | Building a Shiny Application from Scratch</title>
-  <meta name="description" content="2 Getting Started | Building a Shiny Application from Scratch">
+  <title>3 Components of a Shiny Application | Building a Shiny Application from Scratch</title>
+  <meta name="description" content="3 Components of a Shiny Application | Building a Shiny Application from Scratch">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="2 Getting Started | Building a Shiny Application from Scratch" />
+  <meta property="og:title" content="3 Components of a Shiny Application | Building a Shiny Application from Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Getting Started | Building a Shiny Application from Scratch" />
+  <meta name="twitter:title" content="3 Components of a Shiny Application | Building a Shiny Application from Scratch" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="components-of-a-shiny-application.html">
+<link rel="prev" href="getting-started.html">
+<link rel="next" href="deploying-your-shiny-application.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -158,64 +158,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="getting-started" class="section level1">
-<h1><span class="header-section-number">2</span> Getting Started</h1>
-<p>To get started, make sure you have the shiny package installed on your system. You can download shiny from CRAN using the command <code>install.packages(&quot;shiny&quot;)</code>. The RStudio IDE contains a basic shiny application template you can use to create your first shiny application. To access this template, click on the new document icon in the top left corner of the IDE and select “Shiny Web App…”. This will create the R script file <code>app.R</code> which contains the basic components of a shiny application. You can use this simple shiny application as a starting point for building your own applications. It will look something like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
-<span class="co"># This is a Shiny web application. You can run the application by clicking</span>
-<span class="co"># the &#39;Run App&#39; button in the RStudio IDE or running the command runApp(&quot;app.R&quot;).</span>
-<span class="co">#</span>
+<div id="components-of-a-shiny-application" class="section level1">
+<h1><span class="header-section-number">3</span> Components of a Shiny Application</h1>
+<p>In this section, we’ll take a closer look at the shiny application code you just ran. Shiny applications are made up of 2 important components: the user interface (UI) and the server section.</p>
+<div id="ui-section" class="section level2">
+<h2><span class="header-section-number">3.1</span> UI Section</h2>
+<p>The UI section of your shiny application is where you define what your application will look like. In a nutshell, this is where you write your shiny functions and R code, which shiny will then take care of translating into html and CSS code that today’s modern web browsers can read and render into a beautiful web application. For example, the function <code>shiny::fluidPage</code> is often used in the UI section to define the outer most layer of the UI. It creates a web page containing both rows and columns which is fluid, meaning it scales to fill all available browser width. <code>fluidpage()</code> is R code, but once you initiate the rendering process from the console with the <code>runApp()</code> function or by clicking the “Run App” button in the RStudio IDE, it will get converted into HTML and CSS code that defines the layout of your application.</p>
+<p>Our example application used the default <code>sidebarLayout</code> function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the <code>sidebarLayout</code> with other functions like <code>fluidRow</code> and <code>tabsetPanel</code>, for example.</p>
+<p>Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the <code>ui</code> object. At the bottom of your script, you will need to pass both the ui and server sections to the function <code>shiny::shinyApp()</code>.</p>
+</div>
+<div id="server-section" class="section level2">
+<h2><span class="header-section-number">3.2</span> Server Section</h2>
+<p>The server section of your shiny application is where the computation takes place. Any code you write for transforming data or creating visualizations will most likely be in this section.</p>
 
-
-<span class="kw">library</span>(shiny)
-
-<span class="co"># Define UI for application that draws a histogram</span>
-ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
-
-    <span class="co"># Application title</span>
-    <span class="kw">titlePanel</span>(<span class="st">&quot;Old Faithful Geyser Data&quot;</span>),
-
-    <span class="co"># Sidebar with a slider input for number of bins</span>
-    <span class="kw">sidebarLayout</span>(
-        <span class="kw">sidebarPanel</span>(
-            <span class="kw">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,
-                        <span class="st">&quot;Number of bins:&quot;</span>,
-                        <span class="dt">min =</span> <span class="dv">1</span>,
-                        <span class="dt">max =</span> <span class="dv">50</span>,
-                        <span class="dt">value =</span> <span class="dv">30</span>)
-        ),
-
-        <span class="co"># Show a plot of the generated distribution</span>
-        <span class="kw">mainPanel</span>(
-           <span class="kw">plotOutput</span>(<span class="st">&quot;distPlot&quot;</span>)
-        )
-    )
-)
-
-<span class="co"># Define server logic required to draw a histogram</span>
-server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
-
-    output<span class="op">$</span>distPlot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
-        <span class="co"># generate bins based on input$bins from ui.R</span>
-        x    &lt;-<span class="st"> </span>faithful[, <span class="dv">2</span>]
-        bins &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> input<span class="op">$</span>bins <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
-
-        <span class="co"># draw the histogram with the specified number of bins</span>
-        <span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;darkgray&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>)
-    })
-}
-
-<span class="co"># Run the application</span>
-<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre>
-<p>Don’t worry about how the application works exactly. We will go through each code chunk and explain what each one of them does in the next section. For now, try running the application on your computer by clicking the the “Run App” button in the RStudio IDE. This will start the application and open up your default web browser so you view it.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="components-of-a-shiny-application.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deploying-your-shiny-application.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Build a Shiny Application from Scratch</title>
-  <meta name="description" content="Build a Shiny Application from Scratch">
+  <title>4 Shiny Reactivity Model | Build a Shiny Application from Scratch</title>
+  <meta name="description" content="4 Shiny Reactivity Model | Build a Shiny Application from Scratch">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Build a Shiny Application from Scratch" />
+  <meta property="og:title" content="4 Shiny Reactivity Model | Build a Shiny Application from Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Build a Shiny Application from Scratch" />
+  <meta name="twitter:title" content="4 Shiny Reactivity Model | Build a Shiny Application from Scratch" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="user-interface.html">
+<link rel="prev" href="server-function.html">
+<link rel="next" href="deploying-your-shiny-application.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -167,32 +167,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Build a Shiny Application from Scratch</h1>
-<p class="author"><em><a href="mailto:Hadrien@rstudio.com" class="email">Hadrien@rstudio.com</a></em></p>
-</div>
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<p>Shiny is a powerful R package which allows you to create interactive web applications using the R programming language. It is particularly useful for creating applications that run on data and include some sort of data analysis or visualization. In addition to leveraging the power of R and its thousands of packages, one of the big benefits of shiny is the ease of developing applications using R only. Although it is possible to incorporate more traditional web design languages such as custom CSS or Javascript into your shiny application, it is not required.</p>
-<p>This online document was created to accompany workshops and webinars on how to build a Shiny application. This guide was created using the <a href="https://bookdown.org/yihui/bookdown/"><code>bookdown</code></a> package and is still a work in progress. If you find any errors or typos you would like to correct, please feel free to submit a pull request on <a href="https://github.com/hdykiel/shiny-guide">github</a>.</p>
-<div id="getting-started" class="section level2">
-<h2><span class="header-section-number">1.1</span> Getting Started</h2>
-<p>To get started, make sure you have the shiny package installed on your system. You can download shiny from CRAN using the command <code>install.packages(&quot;shiny&quot;)</code>. The RStudio IDE contains a basic shiny application template you can use to create your first shiny application. To access this template, click on the new document icon in the top left corner of the IDE and select “Shiny Web App…”. This will create the R script file <code>app.R</code> which contains the basic components of a shiny application. You can use this simple shiny application as a starting point for building your own applications. It will look something like this:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#</span>
-<span class="co"># This is a Shiny web application. You can run the application by clicking</span>
-<span class="co"># the &#39;Run App&#39; button in the RStudio IDE or running the command runApp(&quot;app.R&quot;).</span>
-<span class="co">#</span>
+<div id="shiny-reactivity-model" class="section level1">
+<h1><span class="header-section-number">4</span> Shiny Reactivity Model</h1>
+<p>Most often, R developers will choose to create a Shiny application because they want their users to be able to interact with their data. In other words, the purpose of a Shiny application is that it <em>reacts</em> to the users’ interactions with it. To that end, it is helpful to understand the basics of how Shiny’s reactivity model works.</p>
+<p><strong>What is reactive programming?</strong></p>
+<p>Most commonly, R code is executed in a linear fashion from top to bottom. Line by line, the program is executed in the order that it was written. With reactive programming, the program also relies on <em>events</em> to determine how and when the code should be executed. Events are monitored and when they occur, the code <em>reacts</em> to those events.</p>
+<p><strong>Why use render and output functions</strong></p>
+<p>Shiny does not intuitively know which pieces of your code should be re-executed and at what times. When writing a Shiny app, you need to tell Shiny which chunks of your code should be reactive to events like users changing the input values in the control widgets. Because you want your plots, tables, and other outputs to be updated everytime a user changes the input, any expressions in your server section that depend on the <code>input</code> variable should be made reactive. To make a code chunk reactive, you can use one of Shiny’s many render functions which are reactive. For example, anything enclosed in the function <code>renderPlot</code> will be re-executed every time an event, such a changing <code>input</code> value, occurs:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example of a Shiny server function</span>
 
+<span class="co"># Define server logic required to draw a histogram</span>
+server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
 
-<span class="kw">library</span>(shiny)
+    output<span class="op">$</span>distPlot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
+        <span class="co"># generate bins based on input$bins from ui.R</span>
+        x    &lt;-<span class="st"> </span>faithful[, <span class="dv">2</span>]
+        bins &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> input<span class="op">$</span>bins <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
 
-<span class="co"># Define UI for application that draws a histogram</span>
+        <span class="co"># draw the histogram with the specified number of bins</span>
+        <span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;darkgray&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>)
+    })
+}</code></pre>
+<p>The above code, through the use of the reactive function <code>renderPlot</code>, will re-render the plot everytime a user interacts with the application. This new plot will be saved to the <code>output</code> variable, but it will not automatically update in the UI. To achieve this, you also need to make that code section in the UI reactive so it is updated whenever an event occurs. This can be done by using one of Shiny’s Output functions:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define UI for application that draws a histogram</span>
 ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
 
     <span class="co"># Application title</span>
     <span class="kw">titlePanel</span>(<span class="st">&quot;Old Faithful Geyser Data&quot;</span>),
 
-    <span class="co"># Sidebar with a slider input for number of bins</span>
+    <span class="co"># Sidebar with a slider input for number of bins </span>
     <span class="kw">sidebarLayout</span>(
         <span class="kw">sidebarPanel</span>(
             <span class="kw">sliderInput</span>(<span class="st">&quot;bins&quot;</span>,
@@ -207,44 +210,17 @@ ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
            <span class="kw">plotOutput</span>(<span class="st">&quot;distPlot&quot;</span>)
         )
     )
-)
+)</code></pre>
+<p>The UI code above will refresh the distribution plot displayed in the UI everytime a new plot is rendered in the server section.</p>
 
-<span class="co"># Define server logic required to draw a histogram</span>
-server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
-
-    output<span class="op">$</span>distPlot &lt;-<span class="st"> </span><span class="kw">renderPlot</span>({
-        <span class="co"># generate bins based on input$bins from ui.R</span>
-        x    &lt;-<span class="st"> </span>faithful[, <span class="dv">2</span>]
-        bins &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(x), <span class="kw">max</span>(x), <span class="dt">length.out =</span> input<span class="op">$</span>bins <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
-
-        <span class="co"># draw the histogram with the specified number of bins</span>
-        <span class="kw">hist</span>(x, <span class="dt">breaks =</span> bins, <span class="dt">col =</span> <span class="st">&#39;darkgray&#39;</span>, <span class="dt">border =</span> <span class="st">&#39;white&#39;</span>)
-    })
-}
-
-<span class="co"># Run the application</span>
-<span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre>
-<p>Don’t worry about how the application works exactly. We will go through each code chunk and explain what each one of them does in the next section. For now, try running the application on your computer by clicking the the “Run App” button in the RStudio IDE. This will start the application and open up your default web browser so you view it.</p>
-</div>
-<div id="components-of-a-shiny-application" class="section level2">
-<h2><span class="header-section-number">1.2</span> Components of a Shiny Application</h2>
-<p>In this section, we’ll take a closer look at the shiny application code you just ran. Shiny applications are made up of 2 important components: the user interface (UI) and the server section.</p>
-<p><strong>UI Section</strong></p>
-<p>The UI section of your shiny application is where you define what your application will look like. In a nutshell, this is where you write your shiny functions and R code, which shiny will then take care of translating into html and CSS code that today’s modern web browsers can read and render into a beautiful web application. For example, the function <code>shiny::fluidPage</code> is often used in the UI section to define the outer most layer of the UI. It creates a web page containing both rows and columns which is fluid, meaning it scales to fill all available browser width. <code>fluidpage()</code> is R code, but once you initiate the rendering process from the console with the <code>runApp()</code> function or by clicking the “Run App” button in the RStudio IDE, it will get converted into HTML and CSS code that defines the layout of your application.</p>
-<p>Our example application used the default <code>sidebarLayout</code> function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the <code>sidebarLayout</code> with other functions like <code>fluidRow</code> and <code>tabsetPanel</code>, for example.</p>
-<p>Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the <code>ui</code> object. At the bottom of your script, you will need to pass both the ui and server objects you created to the function <code>shiny::shinyApp()</code>.</p>
-<p><strong>Server Section</strong></p>
-<p>The server section of your shiny application is where the computation takes place. Any code you write for transforming data or creating visualizations will most likely be in this section.</p>
-
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="user-interface.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="server-function.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deploying-your-shiny-application.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
