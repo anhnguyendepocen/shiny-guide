@@ -2,6 +2,8 @@
 
 The goal is to have a Shiny application that loads quickly, is responsive, and that can support whatever traffic is thrown at it without crashing. To achieve this, there are many available tools at your disposal. These include writing efficient code, pre-processing data ahead of time, and your infrastructure.
 
+Small edit
+
 ## RStudio Connect Infrastructure 
 
 In this section, we'll look at some of the ways you can customize your infrastructure to improve the performance of your applications. 
@@ -26,5 +28,20 @@ In addition to the `loadFactor` setting, you can also explicitly set a limit on 
 This is the exact opposite of the example above, hence you should pick a small `loadFactor` number. Since your application loads quickly but involves expensive computation, it is better to have fewer connections to each R process by spawing additional R processes more aggressively. Although each R process will have to load data in memory, which takes time and hogs server resources, your users will benefit from faster response time thanks to having to share the same R process with fewer users. 
 
 For these reasons, also pick a small `maxRequestsPerProc` number.
+
+## Profiling Your R Code 
+
+Specific tools have been created to help write faster R code. These include `Rprof` from base R and the `profvis` package which can help you identify the slowest parts of your shiny application and focus on making those faster.
+
+For example, you can profile your app's startup like this:
+
+```{r, eval = FALSE}
+library(profvis)
+profvis(runApp())
+```
+
+Profvis will generate a report made up of 2 graphs. The first will show you how much memory and time each line of code consumers and takes to execute, respectively. It will also generate a flame graph, which is visual representation of the profiler's results.
+
+To learn more about the `profvis` package, check out [rstudio.github.io/profvis](https://rstudio.github.io/profvis/) and this [webinar](https://www.rstudio.com/resources/webinars/profvis-profiling-tools-for-faster-r-code/). 
 
 
