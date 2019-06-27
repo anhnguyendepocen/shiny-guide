@@ -2,7 +2,6 @@
 
 The goal is to have a Shiny application that loads quickly, is responsive, and that can support whatever traffic is thrown at it without crashing. To achieve this, there are many available tools at your disposal. These include writing efficient code, pre-processing data ahead of time, and your infrastructure.
 
-Small edit
 
 ## RStudio Connect Infrastructure 
 

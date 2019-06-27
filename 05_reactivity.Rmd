@@ -6,7 +6,7 @@ Most often, R developers will choose to create a Shiny application because they 
 
 Most commonly, R code is executed in a linear fashion from top to bottom. Line by line, the program is executed in the order that it was written. With reactive programming, the program also relies on *events* to determine how and when the code should be executed. Events are monitored and when they occur, the code *reacts* to those events.
 
-**Why use render and output functions**
+**How to make your code reactive**
 
 Shiny does not intuitively know which pieces of your code should be re-executed and at what times. When writing a Shiny app, you need to tell Shiny which chunks of your code should be reactive to events such as users changing the input values in the control widgets. Because you want your plots, tables, and other outputs to be updated everytime a user changes the input, any expressions in your server section that depend on the `input` variable should be made reactive. To make a code chunk reactive, you can use one of Shiny's many render functions which are reactive.  For example, anything enclosed in the function `renderPlot` will be re-executed every time certain event, such a changing `input` value, occurs:
 
