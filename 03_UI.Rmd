@@ -128,3 +128,14 @@ shinyApp(ui = ui, server = server)
 
 Make a mental note of the `inputID` you choose for each of your control widgets, because this is how you will access the user input values in the server section of your application.
 
+## Customizing your UI 
+
+It is possible to customize the UI of your Shiny application by writing your own HTML code. This is not required, and most people who use Shiny will not write the HTML themselves but will rather use R functions that will create the HTML UI page for them, as we described in the previous sections. However, some Shiny developers may know HTML or work with a team that does, and may want to customize their UI. The ability to write your own HTML code allows you to create a more personalized web application.
+
+There are 3 options for writing your UI's HTML: 
+
+1. Use R functions to write custom HTML code: R functions like `tags` can be added to your UI and like all other R shiny functions will get translated into HTML.
+2. Write the whole UI as an HTML document (index.html)
+3. Use HTML to write your HTML components, and R to write your Shiny components, using the `htmlTemplate` function
+
+To learn more about how to customize your Shiny app's UI, watch Garrett Grolemund's video [How to Use HTML to make an awesome web app](https://www.rstudio.com/resources/videos/shiny-ui/).

@@ -1,5 +1,5 @@
 ---
-title: "Build a Shiny Application from Scratch"
+title: "How to Build a Shiny Application from Scratch"
 author: "Hadrien@rstudio.com"
 site: bookdown::bookdown_site
 documentclass: book
@@ -82,8 +82,7 @@ In this section, we'll take a closer look at the shiny application code you just
 
 The UI section of your shiny application is where you define what your application will look like. In a nutshell, this is where you write your shiny functions and R code, which shiny will then take care of translating into html and CSS code that today's modern web browsers can read and render into a beautiful web application. For example, the function `shiny::fluidPage` is often used in the UI section to define the outer most layer of the UI. It creates a web page containing both rows and columns which is fluid, meaning it scales to fill all available browser width. `fluidpage()` is R code, but once you initiate the rendering process from the console with the `runApp()` function or by clicking the "Run App" button in the RStudio IDE, it will get converted into HTML and CSS code that defines the layout of your application.
 
-Our example application used the default `sidebarLayout` function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the `sidebarLayout` with other functions like `fluidRow` and `tabsetPanel`, for example.
-
+Our example application used the default `sidebarLayout` function to create a webpage with a small sidebar on the left hand side, typically used for adding input controls, and a larger column on the right, usually reserved for displaying plots and other content. You can easily change this layout by replacing the `sidebarLayout` with other functions like `fluidRow` and `tabsetPanel`, for example. We'll cover this in more detail later.
 
 Shiny needs to know which section of your script is the UI vs. which section is the server, so make sure to save your UI code to the `ui` object. At the bottom of your script, you will need to pass both the ui and server objects you created to the function `shiny::shinyApp()`.
 
