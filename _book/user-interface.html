@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>2 User Interface | Build a Shiny Application from Scratch</title>
-  <meta name="description" content="2 User Interface | Build a Shiny Application from Scratch">
+  <title>2 User Interface | How to Build a Shiny Application from Scratch</title>
+  <meta name="description" content="2 User Interface | How to Build a Shiny Application from Scratch">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="2 User Interface | Build a Shiny Application from Scratch" />
+  <meta property="og:title" content="2 User Interface | How to Build a Shiny Application from Scratch" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 User Interface | Build a Shiny Application from Scratch" />
+  <meta name="twitter:title" content="2 User Interface | How to Build a Shiny Application from Scratch" />
   
   
   
@@ -141,6 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="user-interface.html"><a href="user-interface.html"><i class="fa fa-check"></i><b>2</b> User Interface</a><ul>
 <li class="chapter" data-level="2.1" data-path="user-interface.html"><a href="user-interface.html#layout-options"><i class="fa fa-check"></i><b>2.1</b> Layout Options</a></li>
 <li class="chapter" data-level="2.2" data-path="user-interface.html"><a href="user-interface.html#input-controls"><i class="fa fa-check"></i><b>2.2</b> Input Controls</a></li>
+<li class="chapter" data-level="2.3" data-path="user-interface.html"><a href="user-interface.html#customizing-your-ui"><i class="fa fa-check"></i><b>2.3</b> Customizing your UI</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="server-function.html"><a href="server-function.html"><i class="fa fa-check"></i><b>3</b> Server Function</a></li>
 <li class="chapter" data-level="4" data-path="shiny-reactivity-model.html"><a href="shiny-reactivity-model.html"><i class="fa fa-check"></i><b>4</b> Shiny Reactivity Model</a></li>
@@ -149,6 +150,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#rstudio-connect-infrastructure"><i class="fa fa-check"></i><b>6.1</b> RStudio Connect Infrastructure</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#runtime-settings"><i class="fa fa-check"></i><b>6.1.1</b> Runtime Settings</a></li>
 </ul></li>
+<li class="chapter" data-level="6.2" data-path="optimizing-your-application.html"><a href="optimizing-your-application.html#profiling-your-r-code"><i class="fa fa-check"></i><b>6.2</b> Profiling Your R Code</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="example-shiny-applications.html"><a href="example-shiny-applications.html"><i class="fa fa-check"></i><b>7</b> Example Shiny Applications</a><ul>
+<li class="chapter" data-level="7.1" data-path="example-shiny-applications.html"><a href="example-shiny-applications.html#next-best-action-application"><i class="fa fa-check"></i><b>7.1</b> Next Best Action Application</a></li>
 </ul></li>
 </ul>
 
@@ -159,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Build a Shiny Application from Scratch</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">How to Build a Shiny Application from Scratch</a>
           </h1>
         </div>
 
@@ -269,6 +274,17 @@ server &lt;-<span class="st"> </span><span class="cf">function</span>(input, out
 <span class="kw">shinyApp</span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre>
 <p><img src="screenshots/widget-control.png" /></p>
 <p>Make a mental note of the <code>inputID</code> you choose for each of your control widgets, because this is how you will access the user input values in the server section of your application.</p>
+</div>
+<div id="customizing-your-ui" class="section level2">
+<h2><span class="header-section-number">2.3</span> Customizing your UI</h2>
+<p>It is possible to customize the UI of your Shiny application by writing your own HTML code. This is not required, and most people who use Shiny will not write the HTML themselves but will rather use R functions that will create the HTMl UI page for them, as we described in the previous sections. However, some Shiny developers may know HTML or work with a team that does, and may want to customize their UI. The ability to write your own HTML code allows you to create a more personalized web application.</p>
+<p>There are 3 options for writing your UI’s HTML:</p>
+<ol style="list-style-type: decimal">
+<li>Use R functions to write custom HTML code: R functions like <code>tags</code> can be added to your UI and like all other R shiny functions will get translated into HTML.</li>
+<li>Write the whole UI as an HTML document (index.html)</li>
+<li>Use HTML to write your HTML components, and R to write your Shiny components, using the <code>htmlTemplate</code> function</li>
+</ol>
+<p>To learn more about how to customize your Shiny app’s UI, watch Garrett Grolemund’s video <a href="https://www.rstudio.com/resources/videos/shiny-ui/">How to Use HTML to make an awesome web app</a>{target = <em>blank</em>}.</p>
 
 </div>
 </div>

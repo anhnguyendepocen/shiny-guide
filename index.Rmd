@@ -90,3 +90,13 @@ Shiny needs to know which section of your script is the UI vs. which section is 
 
 The server section of your shiny application is where the computation takes place. Any code you write for transforming data or creating visualizations will most likely be in this section.
 
+## Bootstrap  
+
+What exactly is Bootstrap, the web framework that Shiny is built on? Knowledge of Bootstrap, as well as how web frameworks work is not necessary to develop shiny applications, but it can interesting to learn about and can help you better understand how your Shiny applications work.
+
+Bootstrap is a web framework, whose main purpose is so that web developers do not have to reinvent the wheel whenever they need to create a new website. Many popular programming language have frameworks, such as Django for Python, Ruby on Rails for Ruby, Angular JS or React for Javascript. Web frameworks are useful because they provide the developer with some basic tooling like URL routing, database manipulation, templates, and some level of basic security for their applications. The idea being frameworks is that they help you automate some of the most common activities performed in web development so you do not need to recreate everything from scratch. 
+
+Bootstrap, which Shiny leverages, is a front-end web framework which came out of a team at Twitter in August 2011. They were using internally developed libraries for building internal web applications and designed Bootstrap as a tool to "document and share common design patterns and assets within the company"[1]("https://web.archive.org/web/20161028153404/http://markdotto.com/2012/01/17/bootstrap-in-a-list-apart-342/). The team graciously open sourced Bootstrap, making it available to the public.
+
+
+

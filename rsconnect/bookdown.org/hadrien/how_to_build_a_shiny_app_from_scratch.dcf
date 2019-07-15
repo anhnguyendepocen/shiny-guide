@@ -5,8 +5,8 @@ account: hadrien
 server: bookdown.org
 hostUrl: https://bookdown.org/__api__
 appId: 2516
-bundleId: 10168
+bundleId: 11073
 url: https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/
-when: 1557767966.80025
+when: 1563205930.42281
 asMultiple: FALSE
 asStatic: FALSE
